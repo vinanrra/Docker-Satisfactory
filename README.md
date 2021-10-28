@@ -33,6 +33,7 @@ docker run -d \
   -p 7777:7777/udp \
   -e START_MODE=1 \
   -e TEST_ALERT=NO \
+  -e VERSION=public \
   -e BACKUP=YES \
   -e MONITOR=YES \
   -e PUID=1000 \
@@ -57,6 +58,7 @@ services:
       - TEST_ALERT=NO
       - BACKUP=YES # Backup server at 5 AM
       - MONITOR=YES # Keeps server up if crash
+      - VERSION=public # Change between server versions
     volumes:
       - ./ServerFiles:/home/sfserver/serverfiles/ #Optional, serverfiles
       - ./log:/home/sfserver/log/ #Optional, logs
@@ -84,8 +86,9 @@ services:
 | `TEST_ALERT=YES` | Test alerts at start of server **optional** |
 | `BACKUP=YES` | Backup server at 5 AM (Only the latest 5 backups will be keep, maximum 30 days) [More info](https://docs.linuxgsm.com/commands/backup) **optional** |
 | `MONITOR=YES` | Monitor server status, if server crash this will restart it [More info](https://docs.linuxgsm.com/commands/monitor) **optional** |
-| `PUID=1000` | for UserID - see below for explanation |
-| `PGID=1000` | for GroupID - see below for explanation |
+| `VERSION=public` | Change server version, check [Branches](https://steamdb.info/app/1690800/depots/) to know the names **optional** |
+| `PUID=1000` | for UserID - see below for explanation **optional** |
+| `PGID=1000` | for GroupID - see below for explanation **optional** |
 | `TimeZone=Europe/Madrid` | for TimeZone - see [TZ Database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for time zones **recomendable**|
 | `--restart unless-stopped` | Restart container always unlesss stopped manually **NEVER USE WITH START_MODE=4** |
 
