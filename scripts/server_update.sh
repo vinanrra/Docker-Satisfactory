@@ -1,7 +1,7 @@
 #!/bin/bash
 ./sfserver update
 
-        if [ "${VERSION,,}" == 'stable'  ]
+        if [ "${VERSION,,}" == 'public'  ]
         then
 	    # Remove branch line
             sed -i 's/branch=".*"/branch=""/' /home/sfserver/lgsm/config-lgsm/sfserver/common.cfg
