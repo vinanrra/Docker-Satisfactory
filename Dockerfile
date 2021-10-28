@@ -108,7 +108,7 @@ RUN chmod +x install.sh user.sh
 
 ##############EXTRA CONFIG##############
 #Ports
-EXPOSE 26900 26900/UDP 26901/UDP 26902/UDP 8082 8081 8080
+EXPOSE 15777/udp 15000/udp 7777/udp
 #Shared folders to host
 VOLUME /home/sfserver/serverfiles/ /home/sfserver/log/ /home/sfserver/lgsm/backup/ /home/sfserver/lgsm/config-lgsm/sfserver/
 ##############EXTRA CONFIG##############
