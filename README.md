@@ -59,7 +59,6 @@ services:
       - MONITOR=YES # Keeps server up if crash
     volumes:
       - ./ServerFiles:/home/sfserver/serverfiles/ #Optional, serverfiles
-      - ./Satisfactory:/home/sfserver/.local/share/7DaysToDie/ #Optional, maps files
       - ./log:/home/sfserver/log/ #Optional, logs
       - ./backups:/home/sfserver/lgsm/backup/ #Optional, backups
       - ./LGSM-Config:/home/sfserver/lgsm/config-lgsm/sfserver # Optional, LGSM-Config
