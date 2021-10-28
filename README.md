@@ -46,7 +46,7 @@ docker run -d \
 ```yaml
 version: '2'
 services:
-  7dtdserver:
+  sfserver:
     image: vinanrra/satisfactory-server
     container_name: sfserver
     environment:
@@ -99,3 +99,77 @@ services:
 | 2 | Update server |
 | 3 | Update server and start |
 | 4 | Backup server and STOP the container|
+
+## Backups
+
+The backup command allows the creation of .tar.gz archives of a game server, alter these three settings by editing LinuxGSM Config
+
+* maxbackups
+* maxbackupdays
+* stoponbackup
+
+Backups settings can be changed in */path/to/LGSM-Config/common.cfg*
+
+If you wants to force a backup run this command:
+
+```bash
+  docker-compose exec sfserver ./sfserver backup
+```
+
+## Alerts
+
+LinuxGSM allows alerts to be received using various methods, multiple alerts can be enable at same time:
+
+* Discord
+* Email
+* IFTTT
+* Mailgun
+* Pushbullet
+* Pushover
+* Telegram
+* Slack
+
+Alerts settings can be changed in */path/to/LGSM-Config/common.cfg*
+
+You recieve alerts only if the server crashes or updates itself.
+
+## User / Group Identifiers
+
+When using volumes (`-v` flags) permissions issues can arise between the host OS and the container, we avoid this issue by allowing you to specify the user `PUID` and group `PGID`.
+
+Ensure any volume directories on the host are owned by the same user you specify and any permissions issues will vanish like magic.
+
+In this instance `PUID=1000` and `PGID=1000`, to find yours use `id user` as below:
+
+```bash
+  $ id username
+    uid=1000(dockeruser) gid=1000(dockergroup) groups=1000(dockergroup)
+```
+
+## Support Info
+
+* Shell access whilst the container is running: `docker exec -it sfserver /bin/bash`
+* To monitor the logs of the container in realtime: `docker logs -f sfserver`
+* container version number
+  * `docker inspect -f '{{ index .Config.Labels "build_version" }}' sfserver`
+* image version number
+  * `docker inspect -f '{{ index .Config.Labels "build_version" }}' vinanrra/satisfactory-server`
+
+## Updating Info
+
+### Via Docker Run/Create
+
+* Update the image: `docker pull vinanrra/satisfactory-server`
+* Stop the running container: `docker stop sfserver`
+* Delete the container: `docker rm sfserver`
+* Recreate a new container with the same docker create parameters as instructed above (if mapped correctly to a host folder, your folders and settings will be preserved)
+* Start the new container: `docker start sfserver`
+* You can also remove the old dangling images: `docker image sfserver`
+
+### Via Docker Compose
+
+* Update all images: `docker-compose pull`
+  * or update a single image: `docker-compose pull sfserver`
+* Let compose update all containers as necessary: `docker-compose up -d`
+  * or update a single container: `docker-compose up -d sfserver`
+* You can also remove the old dangling images: `docker image prune`
