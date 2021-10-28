@@ -43,6 +43,8 @@ source $scriptsDir/check_space.sh
 	
             mv -f common.cfg /home/sfserver/lgsm/config-lgsm/sfserver/common.cfg
 	
+            sed -i "s/branch=".*"/branch="\"${VERSION,,}"\"/" /home/sfserver/lgsm/config-lgsm/sfserver/common.cfg
+
 	# Install Satisfactory Server
 
             ./sfserver auto-install
