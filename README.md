@@ -24,11 +24,10 @@
 docker run -d \
   --name sfserver \
   --restart unless-stopped \
-  -v "./Satisfactory:/home/sdtdserver/.local/share/7DaysToDie/" \
-  -v "./ServerFiles:/home/sdtdserver/serverfiles/" \
-  -v "./LogFolder:/home/sdtdserver/log/" \
-  -v "./BackupFolder:/home/sdtdserver/lgsm/backup/" \
-  -v "./LGSM-Config:/home/sdtdserver/lgsm/config-lgsm/sdtdserver/" \
+  -v "./ServerFiles:/home/sfserver/serverfiles/" \
+  -v "./LogFolder:/home/sfserver/log/" \
+  -v "./BackupFolder:/home/sfserver/lgsm/backup/" \
+  -v "./LGSM-Config:/home/sfserver/lgsm/config-lgsm/sfserver/" \
   -p 15777:15777/udp \
   -p 15000:15000/udp \
   -p 7777:7777/udp \
@@ -75,7 +74,6 @@ services:
 
 | Parameter | Function |
 | :----: | --- |
-| `/path/to/Satisfactory:/home/sfserver/.local/share/7DaysToDie/` | Satisfactory saves, where maps are store. |
 | `/path/to/ServerFiles:/home/sfserver/serverfiles/` | Satisfactory server config files. |
 | `/path/to/Logs:/home/sfserver/log/` | Satisfactory server log files. |
 | `/path/to/BackupFolder:/home/sfserver/lgsm/backup/` | Satisfactory server backups files. |
