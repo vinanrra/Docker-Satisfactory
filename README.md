@@ -64,6 +64,7 @@ services:
       - ./log:/home/sfserver/log/ #Optional, logs
       - ./backups:/home/sfserver/lgsm/backup/ #Optional, backups
       - ./LGSM-Config:/home/sfserver/lgsm/config-lgsm/sfserver # Optional, LGSM-Config
+      - ./saves:/home/sfserver/.config/Epic/FactoryGame/Saved/SaveGames/server #game save files volume
     ports:
       - 15777:15777/udp
       - 15000:15000/udp
