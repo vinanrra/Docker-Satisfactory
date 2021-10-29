@@ -30,7 +30,7 @@ docker run -d \
   -v "./LogFolder:/home/sfserver/log/" \
   -v "./BackupFolder:/home/sfserver/lgsm/backup/" \
   -v "./LGSM-Config:/home/sfserver/lgsm/config-lgsm/sfserver/" \
-  -v "./SavesGames:/home/sfserver/.config/Epic/FactoryGame/Saved/SaveGames/server" \
+  -v "./SavesGames:/home/sfserver/.config/Epic/FactoryGame/Saved/SaveGames" \
   -p 15777:15777/udp \
   -p 15000:15000/udp \
   -p 7777:7777/udp \
@@ -69,7 +69,7 @@ services:
       - ./log:/home/sfserver/log/ # Optional, logs
       - ./backups:/home/sfserver/lgsm/backup/ # Optional, backups
       - ./LGSM-Config:/home/sfserver/lgsm/config-lgsm/sfserver # Optional, LGSM-Config
-      - ./SavesGames:/home/sfserver/.config/Epic/FactoryGame/Saved/SaveGames/server # Satisfactory Saves
+      - ./SavesGames:/home/sfserver/.config/Epic/FactoryGame/Saved/SaveGames # Satisfactory Saves
     ports:
       - 15777:15777/udp
       - 15000:15000/udp
@@ -85,7 +85,7 @@ services:
 | `/path/to/Logs:/home/sfserver/log/` | Satisfactory server log files. |
 | `/path/to/BackupFolder:/home/sfserver/lgsm/backup/` | Satisfactory server backups files. |
 | `/path/to/LGSM-Config:/home/sfserver/lgsm/config-lgsm/sfserver/` | LGSM config files. [More info](https://docs.linuxgsm.com/commands/monitor) |
-| `/path/to/SavesGames:/home/sfserver/.config/Epic/FactoryGame/Saved/SaveGames/server` | Game save files path |
+| `/path/to/SavesGames:/home/sfserver/.config/Epic/FactoryGame/Saved/SaveGames` | Game save files path |
 | `15777:15777/udp` | Default Satisfactory port **required** |
 | `15000:15000/udp` | Default Satisfactory port **required** |
 | `7777:7777/udp` | Default Satisfactory port **required** |  
