@@ -5,10 +5,8 @@ scriptsDir="${rootDir}/scripts"
 # Show log function
 show_log () {
    i="0"
-   while [ $i -lt 1 ] # Infinite loop to keep showing log even if the file get replaced
-   do
-      tail -f /home/sfserver/log/console/sfserver-console.log
-   done
+      # -F = --follow=name --retry
+      tail -F /home/sfserver/log/console/sfserver-console.log
 }
 
 # Check requeriments
