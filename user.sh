@@ -1,5 +1,5 @@
 #!/bin/bash
-function exit_handler {
+exit_handler () {
 
         # Execute the  shutdown commands
         su-exec sfserver /home/sfserver/sfserver stop
