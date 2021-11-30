@@ -87,7 +87,7 @@ RUN apt clean && \
 ##############BASE IMAGE##############
 
 # Create user
-RUN adduser --disabled-password --shell /bin/bash --disabled-login --gecos "" sfserver
+RUN adduser --home /home/sfserver --disabled-password --shell /bin/bash --disabled-login --gecos "" sfserver
 
 # Base dir
 WORKDIR /home/sfserver
