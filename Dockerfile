@@ -55,6 +55,7 @@ ENV VERSION=public
 ENV MONITOR=yes
 ENV BACKUP=yes
 ENV LANG=en_US.utf8
+ENV HOME=/home/sfserver
 
 ##Need use xterm for LinuxGSM##
 ENV TERM=xterm
