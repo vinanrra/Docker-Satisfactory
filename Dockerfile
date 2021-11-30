@@ -112,4 +112,4 @@ EXPOSE 15777/udp 15000/udp 7777/udp
 #Shared folders to host
 VOLUME /home/sfserver/serverfiles/ /home/sfserver/log/ /home/sfserver/lgsm/backup/ /home/sfserver/lgsm/config-lgsm/sfserver/ /home/sfserver/.config/Epic/FactoryGame/Saved/SaveGames
 ##############EXTRA CONFIG##############
-CMD ["/home/sfserver/user.sh", "/home/sfserver/install.sh"]
+ENTRYPOINT ["/home/sfserver/user.sh", "/home/sfserver/install.sh"]
