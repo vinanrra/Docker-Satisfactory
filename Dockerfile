@@ -87,7 +87,7 @@ RUN apt clean && \
 ##############BASE IMAGE##############
 
 # Create user
-RUN adduser -m --disabled-password --shell /bin/bash --disabled-login --gecos "" sfserver
+RUN adduser --disabled-password --shell /bin/bash --disabled-login --gecos "" sfserver
 
 # Base dir
 WORKDIR /home/sfserver
@@ -112,4 +112,4 @@ EXPOSE 15777/udp 15000/udp 7777/udp
 #Shared folders to host
 VOLUME /home/sfserver/serverfiles/ /home/sfserver/log/ /home/sfserver/lgsm/backup/ /home/sfserver/lgsm/config-lgsm/sfserver/ /home/sfserver/.config/Epic/FactoryGame/Saved/SaveGames
 ##############EXTRA CONFIG##############
-ENTRYPOINT ["/home/sfserver/user.sh", "/home/sfserver/install.sh"]
+CMD ["/home/sfserver/user.sh", "/home/sfserver/install.sh"]
