@@ -89,9 +89,6 @@ RUN apt clean && \
 # Create user
 RUN adduser --home /home/sfserver --disabled-password --shell /bin/bash --disabled-login --gecos "" sfserver
 
-# Set HOME
-ENV HOME /home/sfserver
-
 # Base dir
 WORKDIR /home/sfserver
 
