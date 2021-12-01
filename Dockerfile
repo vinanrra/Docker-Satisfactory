@@ -2,6 +2,25 @@ FROM steamcmd/steamcmd:ubuntu-18
 
 STOPSIGNAL SIGTERM
 
+####Environments####
+
+ENV PUID=1000
+ENV PGID=1000
+ENV START_MODE=1
+ENV TEST_ALERT=no
+ENV TimeZone=Europe/Madrid
+ENV VERSION=public
+ENV MONITOR=yes
+ENV BACKUP=yes
+ENV LANG=en_US.utf8
+ENV HOME=/home/sfserver
+
+##Need use xterm for LinuxGSM##
+ENV TERM=xterm
+ENV DEBIAN_FRONTEND noninteractive
+
+####Environments####
+
 ##############BASE IMAGE##############
 
 ####Labels####
@@ -44,24 +63,6 @@ RUN dpkg --add-architecture i386 && \
 		libsdl2-2.0-0:i386 \
 		xz-utils
 
-####Environments####
-
-ENV PUID=1000
-ENV PGID=1000
-ENV START_MODE=1
-ENV TEST_ALERT=no
-ENV TimeZone=Europe/Madrid
-ENV VERSION=public
-ENV MONITOR=yes
-ENV BACKUP=yes
-ENV LANG=en_US.utf8
-
-##Need use xterm for LinuxGSM##
-ENV TERM=xterm
-ENV DEBIAN_FRONTEND noninteractive
-
-####Environments####
-
 # Install latest su-exec
 RUN  set -ex; \
      \
@@ -87,7 +88,7 @@ RUN apt clean && \
 ##############BASE IMAGE##############
 
 # Create user
-RUN adduser --disabled-password --shell /bin/bash --disabled-login --gecos "" sfserver
+RUN adduser --home /home/sfserver --disabled-password --shell /bin/bash --disabled-login --gecos "" sfserver
 
 # Base dir
 WORKDIR /home/sfserver
