@@ -25,7 +25,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ####Labels####
 LABEL maintainer="vinanrra"
-LABEL build_version="version: 0.0.1"
+LABEL build_version="version: 0.0.5"
 
 #####Dependencies####
 
