@@ -41,4 +41,5 @@ chown -R sfserver:sfserver /home/sfserver
 service cron start
 
 # Change user to sfserver
-su-exec sfserver "$@"
+su-exec sfserver bash /home/sfserver/install.sh &
+wait $!
