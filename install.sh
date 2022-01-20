@@ -9,6 +9,12 @@ show_log () {
       tail -F /home/sfserver/log/console/sfserver-console.log
 }
 
+test_alert () {
+   if [ "${TEST_ALERT,,}" == 'yes'  ]; then
+      source $scriptsDir/server_alerts.sh
+   fi
+}
+
 # Check requeriments
 
 # Check if server have been installed
@@ -41,9 +47,7 @@ case $START_MODE in
    ;;
    1)
       source $scriptsDir/server_start.sh
-      if [ "${TEST_ALERT,,}" == 'yes'  ]; then
-         source $scriptsDir/server_alerts.sh
-      fi
+      test_alert
       show_log
    ;;
    2)
@@ -54,9 +58,7 @@ case $START_MODE in
       source $scriptsDir/server_update.sh
 
       source $scriptsDir/server_start.sh
-      if [ "${TEST_ALERT,,}" == 'yes'  ]; then
-         source $scriptsDir/server_alerts.sh
-      fi
+      test_alert
       show_log
    ;; 
    4)
