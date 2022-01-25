@@ -1,61 +1,44 @@
 #!/bin/bash
 
-source $scriptsDir/check_space.sh  
-	    
-	    
-            if [ "${space,,}" == 'no'  ]; then    
-            echo "
-            =======================================================================
-            ERROR:
-            
-            Not enough space.
-            
-            Needed: 12 GB
-            Available: $freeGB GB
-            
-            =======================================================================
-            "
-	    	exit
-            fi
+BASEPATH=/home/sfserver
+LSGMSDTDSERVERCFG=${BASEPATH}/lgsm/config-lgsm/sdtdserver/sdtdserver.cfg
 
-            echo "
-            =======================================================================
-            IMPORTANT:
-            
-            It seems to be the first installation, making preparations...
-            =======================================================================
-            "
+source $scriptsDir/check_space.sh
 
-        # Start to create default files
-            ./sfserver
-        
-            echo "
-            =======================================================================
-            IMPORTANT:
-            
-            PREPARATIONS COMPLETED
-	    
-            Making first server installation.
-            =======================================================================
-            "
-	
-	# Add alerts examples
-	
-            mv -f common.cfg /home/sfserver/lgsm/config-lgsm/sfserver/common.cfg
-	
-            sed -i "s/branch=".*"/branch="\"${VERSION,,}"\"/" /home/sfserver/lgsm/config-lgsm/sfserver/common.cfg
+echo "[INFO] It seems to be the first installation, making preparations..."
 
-	# Install Satisfactory Server
+# Start to create default files
+./sfserver
 
-            ./sfserver auto-install
+# Check version
 
-            echo "
-            =======================================================================
-            IMPORTANT:
-            
-            The server have been installed.
-            More info: https://github.com/vinanrra/Docker-Satisfactory#start-modes
-            =======================================================================
-            "
-	    
-            echo "If this file is missing, server will be re-installed" > serverfiles/DONT_REMOVE.txt
+echo "[INFO] Selection version ${VERSION} to install"
+
+if [ "${VERSION,,}" == 'stable'  ] || [ "${VERSION,,}" == 'public'  ]
+    then
+        if grep -R "branch" "$LSGMSDTDSERVERCFG"
+            then
+                sed -i "s/branch=.*/branch=\"\"/" "$LSGMSDTDSERVERCFG"
+                echo "[INFO] Version changed to ${VERSION,,}"
+            else
+                echo "[INFO] Already on ${VERSION,,}"
+        fi
+    else
+        if grep -R "branch" "$LSGMSDTDSERVERCFG"
+            then
+                sed -i 's/branch=.*/branch="$VERSION"/' "$LSGMSDTDSERVERCFG"
+            else
+                echo branch='"-beta $VERSION"' >> "$LSGMSDTDSERVERCFG"
+                echo "[INFO] Version changed to ${VERSION,,}"
+        fi
+fi
+
+echo "[INFO] Starting server installation"
+
+# Install Satisfactory Server
+
+./sfserver auto-install
+
+echo "[INFO] The server have been installed."
+
+echo "If this file is missing, server will be re-installed" > serverfiles/DONT_REMOVE.txt

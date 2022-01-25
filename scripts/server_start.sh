@@ -2,13 +2,6 @@
 
 ./sfserver start
 
-            echo "
-            =======================================================================
-            IMPORTANT:
-            
-            Starting server...
-            Soon you will see all the info
-            =======================================================================
-            "
+echo "[INFO] Starting server, soon you will see all the info"
 
-        ./sfserver details
+./sfserver details

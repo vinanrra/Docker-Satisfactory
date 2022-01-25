@@ -4,20 +4,13 @@ STOPSIGNAL SIGTERM
 
 ####Environments####
 
-ENV PUID=1000
-ENV PGID=1000
-ENV START_MODE=1
-ENV TEST_ALERT=no
-ENV TimeZone=Europe/Madrid
-ENV VERSION=public
-ENV MONITOR=yes
-ENV BACKUP=yes
-ENV LANG=en_US.utf8
-ENV HOME=/home/sfserver
-
-##Need use xterm for LinuxGSM##
-ENV TERM=xterm
-ENV DEBIAN_FRONTEND noninteractive
+ENV PUID=1000 PGID=1000 TimeZone=Europe/Madrid HOME=/home/sfserver LANG=en_US.utf8 TERM=xterm DEBIAN_FRONTEND=noninteractive \
+	START_MODE=1 \
+	TEST_ALERT=no \
+	TimeZone=Europe/Madrid \
+	VERSION=public \
+	MONITOR=no \
+	BACKUP=no
 
 ####Environments####
 
@@ -25,7 +18,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ####Labels####
 LABEL maintainer="vinanrra"
-LABEL build_version="version: 0.0.6"
+LABEL build_version="version: 0.0.7"
 
 #####Dependencies####
 
@@ -65,18 +58,18 @@ RUN dpkg --add-architecture i386 && \
 
 # Install latest su-exec
 RUN  set -ex; \
-     \
-     curl -o /usr/local/bin/su-exec.c https://raw.githubusercontent.com/ncopa/su-exec/master/su-exec.c; \
-     \
-     fetch_deps='gcc libc-dev'; \
-     apt-get install -y --no-install-recommends $fetch_deps; \
-     gcc -Wall \
-         /usr/local/bin/su-exec.c -o/usr/local/bin/su-exec; \
-     chown root:root /usr/local/bin/su-exec; \
-     chmod 0755 /usr/local/bin/su-exec; \
-     rm /usr/local/bin/su-exec.c; \
-     \
-     apt-get purge -y --auto-remove $fetch_deps
+		\
+		curl -o /usr/local/bin/su-exec.c https://raw.githubusercontent.com/ncopa/su-exec/master/su-exec.c; \
+		\
+		fetch_deps='gcc libc-dev'; \
+		apt-get install -y --no-install-recommends $fetch_deps; \
+		gcc -Wall \
+				/usr/local/bin/su-exec.c -o/usr/local/bin/su-exec; \
+		chown root:root /usr/local/bin/su-exec; \
+		chmod 0755 /usr/local/bin/su-exec; \
+		rm /usr/local/bin/su-exec.c; \
+		\
+		apt-get purge -y --auto-remove $fetch_deps
 
 # Clear unused files
 RUN apt clean && \
@@ -93,19 +86,15 @@ RUN adduser --home /home/sfserver --disabled-password --shell /bin/bash --disabl
 # Base dir
 WORKDIR /home/sfserver
 
+# Download linuxgsm script + perms
 RUN set -ex; \
-wget https://raw.githubusercontent.com/GameServerManagers/LinuxGSM/master/linuxgsm.sh
+	wget https://raw.githubusercontent.com/GameServerManagers/LinuxGSM/master/linuxgsm.sh && \
+	chmod +x linuxgsm.sh && \
+	su-exec sfserver bash linuxgsm.sh sfserver
 
-RUN chmod +x linuxgsm.sh && su-exec sfserver bash linuxgsm.sh sfserver
-
-# Add files
-ADD install.sh user.sh /home/sfserver/
-ADD scripts /home/sfserver/scripts
-ADD lgsm/config-lgsm/sfserver/common.cfg /home/sfserver/
-ADD lgsm /home/sfserver/lgsm
-
-# Apply permissions
-RUN chmod +x install.sh user.sh
+# Add files with perms
+COPY --chmod=755 install.sh user.sh /home/sfserver/
+COPY --chmod=755 scripts /home/sfserver/scripts
 
 ##############EXTRA CONFIG##############
 #Ports

@@ -4,9 +4,8 @@ scriptsDir="${rootDir}/scripts"
 
 # Show log function
 show_log () {
-   i="0"
-      # -F = --follow=name --retry
-      tail -F /home/sfserver/log/console/sfserver-console.log
+   # -F = --follow=name --retry
+   tail -F /home/sfserver/log/console/sfserver-console.log
 }
 
 test_alert () {

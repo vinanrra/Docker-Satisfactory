@@ -1,10 +1,6 @@
 #!/bin/bash
-echo "
-            =======================================================================
-            IMPORTANT:
-            
-            Testing alerts...
-            Check your alerts method
-            =======================================================================
-            "
-        ./sfserver test-alert
+echo "[INFO] Testing alerts..."
+
+./sfserver test-alert
+
+echo "[INFO] Test alert send, check your alerts method"

@@ -137,6 +137,7 @@ LinuxGSM allows alerts to be received using various methods, multiple alerts can
 * Pushover
 * Telegram
 * Slack
+* And more
 
 Alerts settings can be changed in */path/to/LGSM-Config/common.cfg*
 
