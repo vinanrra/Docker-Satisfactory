@@ -1,25 +1,25 @@
 #!/bin/bash
 
 BASEPATH=/home/sfserver
-LSGMSDTDSERVERCFG=${BASEPATH}/lgsm/config-lgsm/sdtdserver/sdtdserver.cfg
+LSGMSFSERVERCFG=${BASEPATH}/lgsm/config-lgsm/sfserver/sfserver.cfg
 
 echo "[INFO] Selection version ${VERSION} to install"
 
 if [ "${VERSION,,}" == 'stable'  ] || [ "${VERSION,,}" == 'public'  ]
     then
-        if grep -R "branch" "$LSGMSDTDSERVERCFG"
+        if grep -R "branch" "$LSGMSFSERVERCFG"
             then
-                sed -i "s/branch=.*/branch=\"\"/" "$LSGMSDTDSERVERCFG"
+                sed -i "s/branch=.*/branch=\"\"/" "$LSGMSFSERVERCFG"
                 echo "[INFO] Version changed to ${VERSION,,}"
             else
                 echo "[INFO] Already on ${VERSION,,}"
         fi
     else
-        if grep -R "branch" "$LSGMSDTDSERVERCFG"
+        if grep -R "branch" "$LSGMSFSERVERCFG"
             then
-                sed -i 's/branch=.*/branch="$VERSION"/' "$LSGMSDTDSERVERCFG"
+                sed -i 's/branch=.*/branch="$VERSION"/' "$LSGMSFSERVERCFG"
             else
-                echo branch='"-beta $VERSION"' >> "$LSGMSDTDSERVERCFG"
+                echo branch='"-beta $VERSION"' >> "$LSGMSFSERVERCFG"
                 echo "[INFO] Version changed to ${VERSION,,}"
         fi
 fi
