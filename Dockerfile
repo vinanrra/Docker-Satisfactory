@@ -86,7 +86,7 @@ RUN adduser --home /home/sfserver --disabled-password --shell /bin/bash --disabl
 # Base dir
 WORKDIR /home/sfserver
 
-# Download linuxgsm script + perms
+# Download linuxgsm script v23.7.0 + perms
 RUN set -ex; \
 	wget https://raw.githubusercontent.com/GameServerManagers/LinuxGSM/master/linuxgsm.sh && \
 	chmod +x linuxgsm.sh && \
