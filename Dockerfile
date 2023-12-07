@@ -18,7 +18,7 @@ ENV PUID=1000 PGID=1000 TimeZone=Europe/Madrid HOME=/home/sfserver LANG=en_US.ut
 
 ####Labels####
 LABEL maintainer="vinanrra"
-LABEL build_version="version: 0.0.7"
+LABEL build_version="version: 0.1.0"
 
 #####Dependencies####
 
@@ -54,7 +54,9 @@ RUN dpkg --add-architecture i386 && \
 		tclsh \
 		cpio \
 		libsdl2-2.0-0:i386 \
-		xz-utils
+		xz-utils \
+  		distro-info \
+    		uuid-runtime
 
 # Install latest su-exec
 RUN  set -ex; \
