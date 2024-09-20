@@ -1,4 +1,4 @@
-FROM steamcmd/steamcmd:ubuntu-18
+FROM steamcmd/steamcmd:ubuntu-24
 
 STOPSIGNAL SIGTERM
 
@@ -22,6 +22,7 @@ LABEL build_version="version: 0.1.0"
 
 #####Dependencies####
 
+# LinuxGSM dependencies
 RUN dpkg --add-architecture i386 && \
 	apt update -y && \
 	apt install -y --no-install-recommends \
@@ -33,6 +34,7 @@ RUN dpkg --add-architecture i386 && \
 		bzip2 \
 		gzip \
 		unzip \
+		unrar \
 		bsdmainutils \
 		python3 \
 		util-linux \
@@ -41,13 +43,14 @@ RUN dpkg --add-architecture i386 && \
 		bc \
 		jq \
 		tmux \
-		lib32gcc1 \
+		lib32gcc-s1 \
 		lib32stdc++6 \
 		libstdc++6 \
 		libstdc++6:i386 \
+		libxml2-utils \
 		telnet \
 		expect \
-		netcat \
+		netcat-openbsd \
 		locales \
 		libgdiplus \
 		cron \
@@ -55,8 +58,10 @@ RUN dpkg --add-architecture i386 && \
 		cpio \
 		libsdl2-2.0-0:i386 \
 		xz-utils \
-  		distro-info \
-  		uuid-runtime
+		distro-info \
+		git \
+		uuid-runtime \
+    pigz
 
 # Install latest su-exec
 RUN  set -ex; \
