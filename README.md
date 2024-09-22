@@ -34,6 +34,7 @@ docker run -d \
   -p 15777:15777/udp \
   -p 15000:15000/udp \
   -p 7777:7777/udp \
+  -p 7777:7777/tcp
   -e START_MODE=1 \
   -e TEST_ALERT=NO \
   -e VERSION=public \
@@ -74,9 +75,11 @@ services:
       - 15777:15777/udp
       - 15000:15000/udp
       - 7777:7777/udp
+      - 7777:7777/tcp
     restart: unless-stopped #NEVER USE WITH START_MODE=4 or START_MODE=0
 ```
 
+To connect PLEASE USE THE SERVER MANAGER (don't use the direct IP)
 ## Parameters
 
 | Parameter | Function |
@@ -89,6 +92,7 @@ services:
 | `15777:15777/udp` | Default Satisfactory port **required** |
 | `15000:15000/udp` | Default Satisfactory port **required** |
 | `7777:7777/udp` | Default Satisfactory port **required** |  
+| `7777:7777/tcp` | Default Satisfactory port **required** |  
 | `START_MODE=1` | Start mode of the container - see below for explanation **required** |
 | `TEST_ALERT=YES` | Test alerts at start of server **optional** |
 | `BACKUP=YES` | Backup server at 5 AM (Only the latest 5 backups will be keep, maximum 30 days) [More info](https://docs.linuxgsm.com/commands/backup) **optional** |
