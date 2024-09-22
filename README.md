@@ -34,7 +34,7 @@ docker run -d \
   -p 15777:15777/udp \
   -p 15000:15000/udp \
   -p 7777:7777/udp \
-  -p 7777:7777/tcp
+  -p 7777:7777/tcp \
   -e START_MODE=1 \
   -e TEST_ALERT=NO \
   -e VERSION=public \
